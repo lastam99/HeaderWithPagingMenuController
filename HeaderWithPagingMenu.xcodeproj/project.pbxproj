@@ -12,6 +12,8 @@
 		428119B91DB769C8004D4343 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428119B71DB769C8004D4343 /* Main.storyboard */; };
 		428119BB1DB769C8004D4343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 428119BA1DB769C8004D4343 /* Assets.xcassets */; };
 		428119BE1DB769C8004D4343 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 428119BC1DB769C8004D4343 /* LaunchScreen.storyboard */; };
+		428119C61DB76A56004D4343 /* SomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428119C51DB76A56004D4343 /* SomeTableViewController.swift */; };
+		428119CC1DB76E7A004D4343 /* PagingMenuController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 428119CB1DB76E7A004D4343 /* PagingMenuController.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		428119BA1DB769C8004D4343 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		428119BD1DB769C8004D4343 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		428119BF1DB769C8004D4343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		428119C51DB76A56004D4343 /* SomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SomeTableViewController.swift; sourceTree = "<group>"; };
+		428119CB1DB76E7A004D4343 /* PagingMenuController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PagingMenuController.framework; path = Carthage/Build/iOS/PagingMenuController.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				428119CC1DB76E7A004D4343 /* PagingMenuController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,7 @@
 			children = (
 				428119B21DB769C8004D4343 /* HeaderWithPagingMenu */,
 				428119B11DB769C8004D4343 /* Products */,
+				428119CA1DB76E79004D4343 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +62,21 @@
 			children = (
 				428119B31DB769C8004D4343 /* AppDelegate.swift */,
 				428119B51DB769C8004D4343 /* ViewController.swift */,
+				428119C51DB76A56004D4343 /* SomeTableViewController.swift */,
 				428119B71DB769C8004D4343 /* Main.storyboard */,
 				428119BA1DB769C8004D4343 /* Assets.xcassets */,
 				428119BC1DB769C8004D4343 /* LaunchScreen.storyboard */,
 				428119BF1DB769C8004D4343 /* Info.plist */,
 			);
 			path = HeaderWithPagingMenu;
+			sourceTree = "<group>";
+		};
+		428119CA1DB76E79004D4343 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				428119CB1DB76E7A004D4343 /* PagingMenuController.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +89,7 @@
 				428119AC1DB769C8004D4343 /* Sources */,
 				428119AD1DB769C8004D4343 /* Frameworks */,
 				428119AE1DB769C8004D4343 /* Resources */,
+				428119C91DB76E50004D4343 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -96,7 +112,6 @@
 				TargetAttributes = {
 					428119AF1DB769C8004D4343 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = NXXHERXPWQ;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,12 +147,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		428119C91DB76E50004D4343 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/PagingMenuController.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		428119AC1DB769C8004D4343 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				428119B61DB769C8004D4343 /* ViewController.swift in Sources */,
+				428119C61DB76A56004D4343 /* SomeTableViewController.swift in Sources */,
 				428119B41DB769C8004D4343 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,7 +292,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NXXHERXPWQ;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HeaderWithPagingMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lastam99.HeaderWithPagingMenu;
@@ -272,7 +309,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = NXXHERXPWQ;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HeaderWithPagingMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lastam99.HeaderWithPagingMenu;
