@@ -89,6 +89,7 @@ class ViewController: UIViewController {
 	
 }
 
+
 // MARK: - Paging Menu Controller Delegate
 
 extension ViewController: PagingMenuControllerDelegate {
@@ -108,7 +109,6 @@ extension ViewController: PagingMenuControllerDelegate {
 protocol HeaderConstraintDelegate: class {
     var isHeaderVisible: Bool { get }
     var headerHeight: CGFloat { get }
-    var statusBarHeight: CGFloat { get }
     var currentHeaderConstraint: CGFloat { get }
     func updateHeaderConstraint(_ constant: CGFloat, animate: Bool)
     func headerBehavior(scrollView: UIScrollView, viewController: UITableViewController)
@@ -117,19 +117,15 @@ protocol HeaderConstraintDelegate: class {
 extension ViewController: HeaderConstraintDelegate {
     var isHeaderVisible: Bool {
         // if header is visible, Don't allow table scroll
-        return currentHeaderConstraint > statusBarHeight - headerHeight
+        return currentHeaderConstraint > -headerHeight
     }
     
     var headerHeight: CGFloat {
-        return self.headerView.frame.size.height + UIApplication.shared.statusBarFrame.height
+        return self.headerView.frame.size.height
     }
-    
-    var statusBarHeight: CGFloat {
-        return UIApplication.shared.statusBarFrame.height
-    }
-    
+
     var currentHeaderConstraint: CGFloat {
-        return self.headerConstraint.constant + statusBarHeight
+        return self.headerConstraint.constant
     }
 
 	func updateHeaderConstraint(_ constant: CGFloat, animate: Bool) {
@@ -151,14 +147,13 @@ extension ViewController: HeaderConstraintDelegate {
             // scroll down -> case 2
             offset = scrollViewOffset - currentHeaderConstraint
         } else {
-            
             // scroll up -> case 1, scroll down -> case 2
             offset = scrollViewOffset + headerHeight
         }
         
         if offset >= headerHeight {
             // case 1
-            offset = statusBarHeight - headerHeight
+            offset = -headerHeight
         } else if 0 <= offset && offset < headerHeight {
             // case 2
             offset = -offset
@@ -168,7 +163,7 @@ extension ViewController: HeaderConstraintDelegate {
             // TODO: - add bounce animation
         }
         
-        self.updateHeaderConstraint(offset - statusBarHeight, animate: false)
+        self.updateHeaderConstraint(offset, animate: false)
         
         if headerVisible {
             scrollView.delegate = nil                 // prevent callback - maybe not good
